@@ -1,11 +1,9 @@
 import express from "express";
+import { getCommonStudents } from "../controllers/register.controller.js";
 import { catchAsyncErrors } from "../middleware/catchAsyncMiddleware.js";
 
 const router = express.Router();
 
-router.get('/hello', catchAsyncErrors(async (req, res, next) => {
-	const data = 'hello';
-	res.send(data);
-}))
+router.get('/commonstudents', catchAsyncErrors(getCommonStudents))
 
 export default router;
