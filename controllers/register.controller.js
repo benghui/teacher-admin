@@ -35,3 +35,27 @@ export const suspendStudent = async (req, res) => {
 		}
 	).then(res.status(204).send("Updated"));
 }
+
+export const receiveNotification = async (req, res) => {
+	const mentioned = req.body.notification.match(/[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+/g);
+
+	const students = await sequelize.query(
+		`SELECT s.email FROM students s
+			JOIN register r ON s.id = r.student_id
+			JOIN teachers t ON r.teacher_id = t.id
+			WHERE t.email = :teacher
+			AND s.isSuspended = false`,
+		{
+			replacements: {
+				teacher: req.body.teacher
+			},
+			type: QueryTypes.SELECT
+		}
+	);
+
+	if (mentioned === null) {
+		res.send({ recipients: students.map(data => data.email) });
+	} else {
+		res.send({ recipients: [...students.map(data => data.email), ...mentioned] })
+	}
+}
