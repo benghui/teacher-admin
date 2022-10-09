@@ -1,10 +1,9 @@
-// import { Register } from "../models/register.model.js";
 import { QueryTypes } from "sequelize";
 import { sequelize } from "../config/db.config.js";
 
 export const getCommonStudents = async (req, res) => {
 	const teachers = req.query.teacher;
-	const length =  typeof teachers == 'string' ? Object.keys(req.query).length : teachers.length;
+	const length = typeof teachers == 'string' ? Object.keys(req.query).length : teachers.length;
 
 	const students = await sequelize.query(
 		`SELECT s.email FROM students s
@@ -23,4 +22,16 @@ export const getCommonStudents = async (req, res) => {
 	);
 
 	res.send({ students: students.map(data => data.email) });
+}
+
+export const suspendStudent = async (req, res) => {
+	await sequelize.query(
+		`UPDATE students SET isSuspended = 1 WHERE email = :email`,
+		{
+			replacements: {
+				email: req.body.student
+			},
+			type: QueryTypes.UPDATE
+		}
+	).then(res.status(204).send("Updated"));
 }
