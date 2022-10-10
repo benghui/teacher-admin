@@ -61,9 +61,6 @@ export const receiveNotification = async (req, res) => {
 }
 
 export const registerStudents = async (req, res) => {
-	if (!req.body.teacher) res.send(422).send({ error: "Invalid teacher email" })
-	if (!req.body.students) res.send(422).send({ error: "Invalid student email" })
-
 	await sequelize.query(
 		`INSERT INTO register (teacher_id, student_id)
 			SELECT teachers.id, students.id FROM teachers
