@@ -59,3 +59,23 @@ export const receiveNotification = async (req, res) => {
 		res.send({ recipients: [...students.map(data => data.email), ...mentioned] })
 	}
 }
+
+export const registerStudents = async (req, res) => {
+	if (!req.body.teacher) res.send(422).send({ error: "Invalid teacher email" })
+	if (!req.body.students) res.send(422).send({ error: "Invalid student email" })
+
+	await sequelize.query(
+		`INSERT INTO register (teacher_id, student_id)
+			SELECT teachers.id, students.id FROM teachers
+			CROSS JOIN students
+			WHERE teachers.email = :teacher
+			AND students.email IN (:students)`,
+		{
+			replacements: {
+				teacher: req.body.teacher,
+				students: req.body.students
+			},
+			type: QueryTypes.INSERT
+		}
+	).then(res.status(204).send("Registered"));
+}

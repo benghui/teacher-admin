@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import routes from "./routes/routes.js";
 import { sequelize } from "./config/db.config.js";
+import {logger} from "./utils/logger.js"
 
 dotenv.config();
 
@@ -13,9 +14,9 @@ app.use('/api', routes);
 
 try {
 	await sequelize.authenticate();
-	console.log('Connection has been established successfully.');
+	logger.info('Connection has been established successfully.');
 } catch (error) {
-	console.error('Unable to connect to the database:', error);
+	logger.error('Unable to connect to the database:', error);
 }
 
-app.listen(port, () => console.log(`AHOY listening on PORT ${port}`));
+app.listen(port, () => logger.info(`AHOY listening on PORT ${port}`));

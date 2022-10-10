@@ -33,7 +33,7 @@ INSERT INTO students (email) VALUES("studenthon@gmail.com");
 INSERT INTO students (email) VALUES("studentpete@gmail.com");
 INSERT INTO students (email) VALUES("studentmary@gmail.com");
 INSERT INTO students (email) VALUES("studentbob@gmail.com");
-INSERT INTO students (email) VALUES("studentmich@gmail.com");
+INSERT INTO students (email) VALUES("studentmiche@gmail.com");
 INSERT INTO students (email) VALUES("studentagnes@gmail.com");
 
 INSERT INTO register (teacher_id, student_id) VALUES(1, 1);

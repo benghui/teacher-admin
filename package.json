@@ -7,18 +7,22 @@
 	"scripts": {
 		"start": "node index.js",
 		"start:dev": "NODE_ENV=dev node index.js",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "mocha"
 	},
 	"author": "Beng Hui",
 	"license": "ISC",
 	"dependencies": {
+		"chai": "^4.3.6",
 		"db-migrate": "^0.11.13",
 		"db-migrate-mysql": "^2.2.0",
 		"dotenv": "^16.0.3",
 		"express": "^4.18.1",
 		"joi": "^17.6.2",
+		"mocha": "^10.0.0",
 		"mysql2": "^2.3.3",
 		"sequelize": "^6.24.0",
-		"uuid": "^9.0.0"
+		"sinon": "^14.0.1",
+		"uuid": "^9.0.0",
+		"winston": "^3.8.2"
 	}
 }
