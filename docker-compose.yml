@@ -1,0 +1,38 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: teachers
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    restart: on-failure
+    env_file: ./.env
+    ports:
+      - $PORT:$PORT
+    environment:
+      - DB_HOST=$DB_DOCKER_HOST
+      - DB_USERNAME=$DB_USERNAME
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_DATABASE=$DB_DATABASE
+      - DB_CONNECTION_LIMIT=$DB_CONNECTION_LIMIT
+    depends_on:
+      - mysql
+
+  mysql:
+    container_name: mysql
+    image: mysql:8.0.30
+    restart: on-failure
+    env_file: ./.env
+    environment:
+      - MYSQL_ROOT_PASSWORD=$DB_PASSWORD
+      - MYSQL_DATABASE=$DB_DATABASE
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+
+
