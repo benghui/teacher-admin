@@ -2,6 +2,8 @@ import { QueryTypes } from "sequelize";
 import { sequelize } from "../config/db.config.js";
 
 export const getCommonStudents = async (req, res) => {
+	if (!req.query.teacher) res.status(422).send({ message: "Invalid query key" });
+
 	const teachers = req.query.teacher;
 	const length = typeof teachers == 'string' ? Object.keys(req.query).length : teachers.length;
 
@@ -56,7 +58,7 @@ export const receiveNotification = async (req, res) => {
 	if (mentioned === null) {
 		res.send({ recipients: students.map(data => data.email) });
 	} else {
-		res.send({ recipients: [...students.map(data => data.email), ...mentioned] })
+		res.send({ recipients: [...new Set([...students.map(data => data.email), ...mentioned])] })
 	}
 }
 

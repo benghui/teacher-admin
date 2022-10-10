@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.get('/commonstudents', catchAsyncErrors(getCommonStudents));
 router.post('/suspend', validate(suspendValidation), catchAsyncErrors(suspendStudent));
-router.post('/retrievefornotifications', validate(notificationValidation),catchAsyncErrors(receiveNotification));
-router.post('/register', validate(registerValidation),catchAsyncErrors(registerStudents));
+router.post('/retrievefornotifications', validate(notificationValidation), catchAsyncErrors(receiveNotification));
+router.post('/register', validate(registerValidation), catchAsyncErrors(registerStudents));
 
 export default router;
