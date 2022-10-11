@@ -7,8 +7,7 @@
 Docker and docker-compose is required for this method.
 
 1. Run command `docker-compose up -d`
-2. Once it is built and running enter command `docker exec -it teachers /bin/sh`
-3. Run command `db-migrate up` to execute the database migration inside of the docker container
+2. Once it is built and running enter command `docker exec -it teachers db-migrate up`
 
 ### Option 2
 
