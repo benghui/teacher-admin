@@ -2,25 +2,26 @@ import Joi from "joi";
 
 export const registerValidation = Joi.object().keys({
 	teacher: Joi.string()
-		.pattern(/[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+/)
+		.email()
 		.required(),
 	students: Joi.array()
 		.items(
 			Joi.string()
-				.pattern(/[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+/)
+				.email()
 				.required()
 		)
 })
 
 export const suspendValidation = Joi.object().keys({
 	student: Joi.string()
-		.pattern(/[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+/)
+		.email()
 		.required()
 })
 
 export const notificationValidation = Joi.object().keys({
 	teacher: Joi.string()
-		.pattern(/[a-zA-Z0-9-_.]+@[a-zA-Z0-9-_.]+/)
+		.email()
 		.required(),
-	notification: Joi.string().required()
+	notification: Joi.string()
+		.required()
 })
